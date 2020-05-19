@@ -8,8 +8,10 @@ device = client.devices()[0]
 # Launch whatsapp using adb
 device.shell("am start -n com.whatsapp/com.whatsapp.Main")
 
+# Opens New messagw window directly
+device.shell("am start -n com.whatsapp/com.whatsapp.ContactPicker")
+
 # Long press on 1st contact to activate select mode in new message window.
-device.shell("input touchscreen tap 1000 2200")
 device.shell("input touchscreen swipe 500 670 500 670 3000")
 
 # Select all other chats

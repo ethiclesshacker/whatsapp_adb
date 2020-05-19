@@ -6,15 +6,13 @@ client = AdbClient(host="127.0.0.1", port=5037)
 device = client.devices()[0]
 
 # Launch whatsapp using adb
-# device.shell("am start -n com.whatsapp/com.whatsapp.Main")
+device.shell("am start -n com.whatsapp/com.whatsapp.Main")
 
-inital = 750
 position = 670
 count = 0
 for i in range(8):
     print(i+1)
     while(position <= 2250):
-        
         # Press new message
         device.shell("input touchscreen tap 1000 2200")
 
@@ -27,7 +25,7 @@ for i in range(8):
 
         # Select chat
         device.shell(f"input touchscreen tap 500 {position}")
-
+        
         # Position for next chat
         position += 170
 
@@ -37,15 +35,13 @@ for i in range(8):
         # Press the back button to exit from chat window
         device.shell("input keyevent 4")
 
-    
-    # This should move up in the loop and not done if i = 1.
-
     # First screen != rest screens.
+    # Resetting position for next page
     position = 300
 
-# device.shell("input touchscreen tap 1000 2200")
-# device.shell(f"input touchscreen tap 500 {position-250}")
-# Scroll top to bottom
-# device.shell("input touchscreen swipe 500 2200 500 200 2000")
 
-# print("Count = ", count)
+def sendMessage(message):
+    device.shell('input text "'+message+'"')
+
+    # Keyevent 66 - ENTER key
+    device.shell("input keyevent 66")
